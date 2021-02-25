@@ -1,27 +1,79 @@
 # vue-cumulative-circle
 
-> vue-cumulative-circle UI Component
+> Vue Cumulative Circle Component
 
-## Build Setup
+## Demo
+![Alt Text](./demo-play.gif)
 
-``` bash
-# install dependencies
-npm install
+## Usage
+```
+import Vue from 'vue'
+import App from './App'
+import CumulativeCircle from "./CumulativeCircle.vue";
 
-# serve with hot reload at localhost:8080
-npm run dev
+Vue.use(CumulativeCircle);
 
-# build for production with minification
-npm run build
+Vue.config.productionTip = false
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+new Vue({
+  render: (h) => h(App),
+}).$mount("#app");
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Example
+
+```
+<template>
+  <div id="app">
+    <cumulative-circle :size="200"
+                      :stroke-width="8"
+                      v-model="data"/>
+    <div>
+      <p>data</p>
+      <div><label>data 0</label><input v-model="data[0].percentage"></div>
+      <div><label>data 1</label><input v-model="data[1].percentage"></div>
+      <div><label>data 2</label><input v-model="data[2].percentage"></div>
+      <div><label>data 3</label><input v-model="data[3].percentage"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+import CumulativeCircle from "./CumulativeCircle";
+export default {
+  name: 'App',
+  components: {
+    CumulativeCircle
+  },
+  data() {
+    return {
+      data: [
+        {
+          color: '#ffa10e',
+          percentage: 10
+        },
+        {
+          color: '#1886ff',
+          percentage: 20
+        },
+        {
+          color: 'red',
+          percentage: 20
+        },
+        {
+          color: 'blue',
+          percentage: 10
+        }
+      ]
+    }
+  }
+}
+</script>
+```
+
+| Prop       | Type       | Description   | default  |
+| ------------- |:-------------:| -----:| -----:|
+| `value` | `Array` | object array(property: color, percentage)   | $1600 |
+| `size`      | `Number`     |  component size (w x h) | 200 |
+| `strokeWidth` | `Number`     | circle bar width | 8 |
+| `ringColor` | `String`     |  default ring color | f2f2f2 |
